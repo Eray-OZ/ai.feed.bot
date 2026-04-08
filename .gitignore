@@ -1,5 +1,6 @@
 # Environments
 .env
+.env.local
 .venv
 env/
 venv/
@@ -11,7 +12,17 @@ venv.bak/
 __pycache__/
 *.py[cod]
 *$py.class
+*.egg-info/
+dist/
+build/
 
-# State / Data
+# Logs
+*.log
+
+# State / Data (local fallback — prod'da Redis kullanılıyor)
 seen_news.json
 *.sqlite3
+
+# IDE
+.vscode/
+.idea/

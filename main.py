@@ -50,15 +50,15 @@ async def news_workflow():
         
     logger.info("Haber iş akışı tamamlandı.")
 
-@dp.message(Command("haberler"))
-async def cmd_haberler(message: Message):
-    """Manuel olarak süreci tetiklemek için /haberler komutu."""
+@dp.message(Command("news"))
+async def cmd_news(message: Message):
+    """Manuel olarak süreci tetiklemek için /news komutu."""
     # Sadece yetkili kişinin (.env'deki CHAT_ID) komutlarını kabul et
     if str(message.chat.id) != str(CHAT_ID):
-        await message.answer("Bu botu kullanma yetkiniz yok.")
+        await message.answer("You are not authorized to use this bot.")
         return
         
-    await message.answer("⏳ Yapay zeka haberleri taranıyor ve analiz ediliyor... Lütfen bekleyin.")
+    await message.answer("Fetching and analyzing the latest AI news... Please wait.")
     # Arka planda workflow'u başlat
     asyncio.create_task(news_workflow())
 
