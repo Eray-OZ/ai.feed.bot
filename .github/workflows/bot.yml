@@ -4,8 +4,8 @@ on:
   workflow_dispatch:  # GitHub üzerinden manuel "Run workflow" butonu çıkarır
   schedule:
     # GitHub Actions saatleri UTC'dir! (Türkiye saati UTC+3)
-    # Türkiye saatiyle 13:40'ta çalışması için -> 10:40 UTC
-    - cron: '40 10 * * *'
+    # Türkiye saatiyle 13:55'te çalışması için -> 10:55 UTC
+    - cron: '55 10 * * *'
     
     # Asıl günlük schedule: Türkiye saatiyle sabah 09:00 -> 06:00 UTC 
     - cron: '00 06 * * *'
