@@ -67,9 +67,16 @@ async def main():
         logger.error("Lütfen .env dosyasında TELEGRAM_TOKEN, CHAT_ID ve RSS_URLS tanımlamalarını yapın.")
         return
 
-    logger.info("Bot başlatılıyor...")
+    import sys
+    if "--cron" in sys.argv:
+        logger.info("Bot cron modunda başlatıldı. Görev 1 kez çalıştırılıp kapanacak...")
+        await news_workflow()
+        await bot.session.close()
+        return
+
+    logger.info("Bot polling modunda başlatılıyor...")
     
-    # Zamanlayıcıyı kur ve başlat
+    # Zamanlayıcıyı kur ve başlat (sadece local/sürekli açık sunucular için)
     scheduler = setup_scheduler(news_workflow)
     scheduler.start()
     

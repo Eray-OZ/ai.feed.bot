@@ -24,7 +24,7 @@ An autonomous Telegram bot that monitors the AI world, curates the most importan
 ├── logger.py         # Centralized logging configuration
 ├── requirements.txt
 ├── .env.example
-└── Procfile          # Railway deployment config
+└── .env.example
 ```
 
 ## Installation
@@ -47,12 +47,9 @@ python main.py
 | `GEMINI_API_KEY` | Google AI Studio API key |
 | `RSS_URLS` | Comma-separated list of RSS feed URLs |
 
-## Deployment (Railway)
+## Deployment
 
-1. Push the repository to GitHub.
-2. Create a new project on [railway.app](https://railway.app) and connect the repository.
-3. Add the environment variables listed above in the Railway Variables tab.
-4. Railway will automatically deploy and keep the bot running 24/7.
+Coming soon.
 
 ## Tech Stack
 

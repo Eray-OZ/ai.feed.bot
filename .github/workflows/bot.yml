@@ -1,0 +1,40 @@
+name: AI News Bot Daily Dispatch
+
+on:
+  workflow_dispatch:  # GitHub üzerinden manuel "Run workflow" butonu çıkarır
+  schedule:
+    # GitHub Actions saatleri UTC'dir! (Türkiye saati UTC+3)
+    # Türkiye saatiyle 13:40'ta çalışması için -> 10:40 UTC
+    - cron: '40 10 * * *'
+    
+    # Asıl günlük schedule: Türkiye saatiyle sabah 09:00 -> 06:00 UTC 
+    - cron: '00 06 * * *'
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Repoyu Çek (Checkout)
+      uses: actions/checkout@v4
+
+    - name: Python Ortamını Kur (Python 3.11)
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: 'pip' # Pip paketlerini cache'ler, her gün hızlı kurulur
+
+    - name: Bağımlılıkları Yükle
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Botu Çalıştır (Cron Mode)
+      env:
+        # GitHub Repository Secrets'dan gelecek gizli değişkenler:
+        TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+        CHAT_ID: ${{ secrets.CHAT_ID }}
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        RSS_URLS: ${{ secrets.RSS_URLS }}
+      run: |
+        python main.py --cron
