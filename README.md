@@ -47,9 +47,13 @@ python main.py
 | `GEMINI_API_KEY` | Google AI Studio API key |
 | `RSS_URLS` | Comma-separated list of RSS feed URLs |
 
-## Deployment
+## Serverless Deployment (GitHub Actions)
 
-Coming soon.
+1. Push this repository to GitHub.
+2. Go to your repository settings on GitHub: **Settings > Secrets and variables > Actions**.
+3. Create a **New repository secret** for each environment variable (`TELEGRAM_TOKEN`, `CHAT_ID`, `GEMINI_API_KEY`, `RSS_URLS`).
+4. The bot will automatically wake up, check for news, send you a Telegram digest, and shut down every day at **13:40 (Istanbul Time)** via the `.github/workflows/bot.yml` configuration.
+5. *Continuous Integration:* Whenever you push new code to the repository, the next scheduled run will automatically use the freshest code. No server restarts required!
 
 ## Tech Stack
 
